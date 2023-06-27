@@ -1,0 +1,225 @@
+<%- include('../adminPartials/header') %>
+
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/adminDashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+       
+        <li class="menu-item ">
+            <a class="menu-link " href="/admin/products"> <i class="icon material-icons md-monetization_on"></i>
+            
+                <span class="text">ProductList</span>
+            </a>
+           
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/order"> <i class="icon material-icons md-shopping_cart"></i>
+            
+                <span class="text">Orders</span>
+            </a>
+           
+        </li>
+        
+
+
+     
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/userslist"> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+           
+        </li>
+        
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/Categories"> <i class="icon material-icons md-category"></i>
+            </i>
+                <span class="text">Categories</span>
+            </a>
+           
+        </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+                <span class="text">Coupon</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/couponList">Coupon List</a>
+                <a href="/admin/addcoupon">Add Coupon</a>
+            </div>
+        </li>
+        
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" > <i class="icon material-icons md-image"></i>
+                <span class="text">Banner</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/bannerList">Banner List</a>
+                <a href="/admin/banner">Add Banner</a>
+            </div>
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/offer"><i class="icon material-icons md-favorite"></i>
+
+            </i>
+                <span class="text">Offers</span>
+            </a>
+           
+        </li>
+       
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+     
+    </ul>
+    <br>
+</nav>
+</aside>
+<main class="main-wrap">
+    <form id="myForm" method="get" action="/admin/bannerList">
+<section class="content-main">
+    
+    <div class="row">
+        <div class="col-6">
+            <div class="content-header">
+                <h2 class="content-title">Add New Banner</h2>
+                <div>
+                    <!-- <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button> -->
+                    <button  type="submit" class="btn btn-md rounded font-sm hover-up">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h6>1. General info</h6>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="mb-4">
+                                <label class="form-label">Banner title</label>
+                                <input type="text" placeholder="Type here" name="Name" class="form-control">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Description</label>
+                                <textarea placeholder="Type here" class="form-control" name="Description" rows="4"></textarea>
+                            </div>
+                           
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                   
+                    <hr class="mb-4 mt-0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h6>2. Media</h6>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="mb-4">
+                                <label class="form-label">Images</label>
+                                <input class="form-control"  name="Image"   type="file">
+                            </div>
+                        </div> <!-- col.// -->
+                    </div> <!-- .row end// -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+</form>
+</section>
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    console.log("Save button clicked");
+   $('#myForm').submit(function(event) {
+    event.preventDefault(); // Prevent the default form submission
+  var formData = new FormData(this); // Create a new FormData object
+  $.ajax({
+    url: '/admin/addbanner',
+    method: 'POST',
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function(response) {
+        if(response.message == "banner added"){
+        Swal.fire({
+            title: "Success",
+            text: "Banner is added",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload()
+            }
+          });
+        }else{
+            Swal.fire({
+            title: "Error",
+            text: response.message,
+            icon: "error",
+            confirmButtonText: "OK",
+          })
+        }
+
+
+    },
+    
+  });
+});
+
+$('.deletebanner').on('click',async function(){
+    console.log("button clicked");
+    const id = $(this).data('bannerdelete')
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+	$.ajax({
+		url:"/admin/deletebanner?id=" +id,
+		methode:'get',
+
+		success: function(response){
+          if(response.message == "1"){
+			Swal.fire({
+                 title: "Success",
+                text: "Banner is deleted",
+                icon: "success",
+                confirmButtonText: "OK"
+               }).then((result)=>{
+                            if(result.isConfirmed){
+                                location.reload()
+                            }
+                        })  
+		  }else{
+			Swal.fire({
+                 title: "Error",
+                text: "Something went worng",
+                icon: "error",
+                confirmButtonText: "OK"
+               }); 
+		  }
+		}
+	  })
+    }
+    });
+   
+})
+ 
+</script>
+
+

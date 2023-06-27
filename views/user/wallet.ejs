@@ -1,0 +1,61 @@
+<%- include('../Partials/header') %>
+<div >
+	<div class="page-header text-center" style="background-image: url('assets/images/profile.jpg')">
+		<div class="container">
+			<h1 class="page-title">My Account<span>Shop</span></h1>
+		</div><!-- End .container -->
+	</div><!-- End .page-header -->
+
+	<div class="col-md-8 col-lg-9">
+		<div class="tab-content">
+			<div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">                                    
+				<% if (wallet)  { %>
+					<div class="page-header text-center" style=" background-color: rgb(192, 155, 110); height: 8em;align-items: center;display: flex; ">                                    
+						<div class="container" >
+							<h2 class="page-title pt-2" style="color: white; display: inline-flex; ">Wallet Total: <br> ₹ <%=wallet.balance%></span> </h2>
+						</div><!-- End .container -->
+					</div><!-- End .page-header -->
+					<table class="table table-wishlist table-mobile" style="width: 820px;">
+						<thead>
+							<tr>
+								<th>Order ID</th>
+								<th>Date</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% wallet.orderDetails.reverse().forEach(function(order) { %>
+								<tr>
+									<td><a href="/orderDetails?id=<%=order.orderid%>"><%=order.orderid%></a></td>
+									<td class="stock-col"><%=new Date(order.date).toLocaleDateString()%></td>
+									<td class="price-col">
+										<% if (order.type == "Added") { %>
+											<span class="badge text-success">+ ₹<%=order.amount %>.00</span>
+										<% } else { %>
+											<span class="badge text-danger">-₹<%=order.amount %>.00</span>
+										<% } %>
+									</td>
+								</tr>
+							<% }); %>
+						</tbody>
+					</table>
+					
+				<% }  else { %>
+					<div class="page-header text-center" style=" background-color: rgb(229, 182, 96); height: 8em;align-items: center;display: flex; ">                                    
+						<div class="container" >
+							<h2 class="page-title pt-2" style="color: white; display: inline-flex; ">Wallet Total: <br> ₹ 0</span> </h2>
+						</div><!-- End .container -->
+					</div><!-- End .page-header -->
+				<%}%>
+			</div><!-- .End .tab-pane -->                                
+		</div>
+	</div><!-- End .col-lg-9 -->
+</div><!-- End .row -->
+</div><!-- End .container -->
+
+
+    
+
+<%- include('../Partials/footer') %>
+
+  

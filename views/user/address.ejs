@@ -1,0 +1,119 @@
+<%- include('../Partials/header') %>
+
+
+<div >
+	<div class="page-header text-center" style="background-image: url('assets/images/profile.jpg')">
+		<div class="container">
+			<h1 class="page-title">My Account<span>Shop</span></h1>
+		</div><!-- End .container -->
+	</div><!-- End .page-header -->
+									
+									<button class="btn btn-outline-primary-1 " style="margin-top: 250px margin-left-200px">
+
+
+										<a href="#tab-account" class="nav-link" id="tab-address-link"
+											data-toggle="tab" role="tab" aria-controls="tab-orders"
+											aria-selected="false">Add Address <i class="icon-edit"></i></a>
+									
+									</button>
+
+									<div class="row">
+										<% address.forEach(function(address) { %>
+
+										<div class="col-lg-4">
+											
+
+											<div class="card card-dashboard">
+
+												<form action="/address" method="get">
+												
+													<div class="card-body">
+															<h3 class="card-title">Billing Address</h3>
+															<!-- End .card-title -->
+															<p>
+																<%=address.Name%> <br>
+																	<%=address.LastName %> <br>
+																		<%=address.address %> <br>
+																			<%=address.city %> <br>
+																				<%=address.State %> <br>
+																					<%=address.Zipcode %> <br>
+																						<%=address.landmark%>
+
+															</p>
+
+															<a href="/deleteaddress?id=<%= address._id %>">
+																Delete <i class="icon-delete"></i>
+															  </a>
+															  
+															  
+															<!-- <a href="#tab-account1" class="nav-link"
+																id="tab-address-link" data-toggle="tab" role="tab"
+																aria-controls="tab-orders" aria-selected="false">Edit <i
+																	class="icon-edit"></i></a></p> -->
+															
+													</div><!-- End .card-body -->
+											
+												</form>
+
+											</div>
+										</div>
+
+										<% }) %>
+										
+									</div><!-- End .row -->
+								</div>
+
+                                <div class="accordion-item">
+									<div class="tab-pane fade" id="tab-account" role="tabpanel"
+										aria-labelledby="tab-account-link">
+										<form action="/address_add" method="post">
+											<div class="row">
+												<div class="col-sm-6">
+													<label>First Name <span style="color: red;">*</span></label>
+													<input type="text" class="form-control" required name="Name">
+												</div><!-- End .col-sm-6 -->
+
+												<div class="col-sm-6">
+													<label>Last Name <span style="color: red;">*</span></label>
+													<input type="text" class="form-control" required name="LastName">
+												</div><!-- End .col-sm-6 -->
+											</div><!-- End .row -->
+
+											<label>
+												Address<span style="color: red;">*</span> </label>
+											<input type="text" class="form-control" required name="address">
+											<!-- <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small> -->
+											<div class="row">
+												<div class="col-sm-6">
+													<label>State <span style="color: red;">*</span></label>
+													<input type="text" class="form-control" required name="State">
+												</div><!-- End .col-sm-6 -->
+
+												<div class="col-sm-6">
+													<label>City<span style="color: red;">*</span></label>
+													<input type="text" class="form-control" required name="city">
+												</div><!-- End .col-sm-6 -->
+											</div><!-- End .row -->
+											<!-- <label>Email address *</label>
+													<input type="email" class="form-control" required> -->
+
+											<label>Zipcode<span style="color: red;">*</span></label>
+											<input type="text" class="form-control" name="Zipcode">
+
+											<label>Phone<span style="color: red;">*</span></label>
+											<input type="tel" class="form-control" name="phone">
+
+											<label>LandMark</label>
+											<input type="text" class="form-control mb-2" name="landmark">
+
+											<button type="submit" class="btn btn-outline-primary-2">
+												<span>SAVE CHANGES</span>
+												<i class="icon-long-arrow-right"></i>
+											</button>
+										</form>
+									</div><!-- .End .tab-pane -->
+								</div>
+							</div>
+
+
+								<%- include('../Partials/footer') %>

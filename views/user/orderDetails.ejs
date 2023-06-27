@@ -1,0 +1,101 @@
+<%- include('../Partials/header') %>
+
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/order1.jpg')">
+            <div class="container">
+                <h1 class="page-title">Order<span>Details</span></h1>
+                <div class="cart-discount">
+                </div>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->           
+        
+        <div class="page-content">
+            <div class="checkout">
+                <div class="container">
+                    <h2 class="checkout-title">Billing Details</h2>
+                    <button type="button" style="margin-left: 1000px;" id="btn-print-this" class="btn btn-secondary btn-icon bg-dark">
+                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                      </button>
+                    <div class="summary" id="dwnld">
+                        <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+                        
+                        <table id="mytabel" class="table table-summary">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>                                            
+                                </tr>
+                            </thead>                                    
+                            <tbody> 
+                                <% order.product.forEach(function(product) { %>
+                                <tr>                                            
+                                    <td><%=product.product_id.productname%></td>                                                                                      
+                                    <td ><%=product.quantity%></td>
+                                    <% let total = product.product_id.price * product.quantity%>
+                                    <td >₹<%=total%>.00</td>                                            
+                                </tr>
+                                <% }); %>
+                            </tbody>     
+                        </table><!-- End .table table-summary -->
+
+                        <table class="table table-summary">
+                            <tbody>
+                                <!-- <tr>
+                                    <td>Coupn Amount</td>
+                                    <td ><%=order.coupon%></td>
+                                </tr> -->
+                                <tr class="summary-total">
+                                    <td>Total:</td>
+                                    <td >₹<%=order.total%>.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Method</td>
+                                    <td ><%=order.paymentmethod%></td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Status</td>
+                                    <% if(order.paymentStatus == "Paid")  { %>
+                                    <td class="text-success"><%=order.paymentStatus%></td>
+                                    <% } else{ %>
+                                    <td class="text-error"><%=order.paymentStatus%></td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td ><%=new Date(order.orderDate).toLocaleDateString()%></td>
+                                </tr>
+                                <tr>                                            
+                                    <td>Shipping Address</td>
+                                    <td>
+                                        <h4><%=order.address.name%></h4>
+                                        <%=order.address.address%> <br><%=order.address.landmark%><br>
+                                        <%=order.address.city%><br><%=order.address.State%>, 
+                                        <%=order.address.Pincode%>.<br>Phone: <%=order.address.phone%>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>  
+                    </div><!-- End .accordion -->
+                </div><!-- End .summary -->
+            </div>
+        </div>
+    </main><!-- End .main -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+          $('#btn-print-this').click(function() {
+            var printContents = $('#dwnld').html(); // Replace 'content-wrapper' with the ID of the div you want to print
+            var originalContents = document.body.innerHTML;
+      
+            document.body.innerHTML = printContents;
+            window.print();
+      
+            document.body.innerHTML = originalContents;
+          });
+        });
+      </script>
+      
+<%- include('../Partials/footer') %>

@@ -1,0 +1,167 @@
+<%- include('../adminPartials/header') %>
+<style>
+  .description-truncate {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; 
+  }
+</style>
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/adminDashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+       
+        <li class="menu-item ">
+            <a class="menu-link " href="/admin/products"> <i class="icon material-icons md-monetization_on"></i>
+            
+                <span class="text">ProductList</span>
+            </a>
+           
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/order"> <i class="icon material-icons md-shopping_cart"></i>
+            
+                <span class="text">Orders</span>
+            </a>
+           
+        </li>
+        
+
+
+     
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/userslist"> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+           
+        </li>
+        
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/Categories"> <i class="icon material-icons md-category"></i>
+            </i>
+                <span class="text">Categories</span>
+            </a>
+           
+        </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+                <span class="text">Coupon</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/couponList">Coupon List</a>
+                <a href="/admin/addcoupon">Add Coupon</a>
+            </div>
+        </li>
+      
+        <li class="menu-item has-submenu">
+          <a class="menu-link" href="#" > <i class="icon material-icons md-image"></i>
+              <span class="text">Banner</span>
+          </a>
+          <div class="submenu">
+              <a href="/admin/bannerList">Banner List</a>
+              <a href="/admin/banner">Add Banner</a>
+          </div>
+      </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/offer"><i class="icon material-icons md-favorite"></i>
+
+            </i>
+                <span class="text">Offers</span>
+            </a>
+           
+        </li>
+       
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+        <!-- <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                <span class="text">Settings</span>
+            </a>
+            <div class="submenu">
+                <a href="page-settings-1.html">Setting sample 1</a>
+                <a href="page-settings-2.html">Setting sample 2</a>
+            </div>
+        </li> -->
+        <!-- <li class="menu-item">
+            <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                <span class="text"> Starter page </span>
+            </a>
+        </li> -->
+    </ul>
+    <br>
+</nav>
+</aside>
+<main class="main-wrap">
+    
+<div class="card-body">
+    <div class="table-responsive">
+      <table  id="products-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+          
+            <th class="text-end">Delete</th>
+            <th class="text-end">Upload</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% banner.forEach(function(banner) { %>
+            <tr>
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                </div>
+              </td>
+              <td>
+                <a class="itemside" href="#">
+                 
+                        
+                      <% if (banner.Image) { %>
+                        <img src="/upload/banner<%= banner.Image %>" class="img-sm img-thumbnail square-image" alt="Image">
+
+                            <% } else { %>
+                            <img src="" alt="Default Image"  class="img-sm  img-thumbnail square-image">
+                            <% } %>
+                        
+                 
+                  
+                </a>
+              </td>
+              <td>
+              <div class="info">
+                <h6 class="mb-0"><%- banner.Name %></h6>
+              </div>
+            </td>
+            <td>
+              <div class="info">
+                <h6 class="description-truncate"><%- banner.Description %></h6>
+              </div>
+            </td>
+              
+              
+              <td class="text-end">
+                <a href="/admin/delete?id=<%= banner._id %>" class="btn btn-sm font-sm btn-light rounded">
+                  <i class="material-icons md-delete_forever"></i> Delete
+                </a>
+              </td>
+              <td class="text-end">
+                <a href="/admin/editproduct?id=<%= banner._id %>" class="btn btn-sm font-sm rounded btn-brand">
+                  <i class="material-icons md-upload"></i> Upload
+                </a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

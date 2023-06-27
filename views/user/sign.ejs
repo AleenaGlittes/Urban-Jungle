@@ -1,0 +1,189 @@
+
+
+<%- include('../partials/header') %>
+<main class="main">
+ 
+
+    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login.jpg')">
+        <div class="container">
+            <div class="form-box">
+                <div class="form-tab">
+                    <ul class="nav nav-pills nav-fill" role="tablist">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active" id="register-tab-2" data-toggle="tab"   >Register</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                       
+                       
+                        <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                            <!-- <form action="/signup" method="post"> -->
+                                <form   id="gform" action="/signup" onsubmit="return checkPassword()"  method="post">
+
+                                <div class="form-group">
+                                    <label for="register-email-2">Name <span style="color: red;"> *</span></label>
+                                    <input type="text" class="form-control" id="register-email-2" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-email-2">Your email address <span style="color: red;"> *</label>
+                                    <input type="email" class="form-control" id="register-email-2" name="email" required>
+                                </div><!-- End .form-group -->
+                                <div class="form-group">
+                                    <label for="register-email-2">Phone <span style="color: red;"> *</label>
+                                    <input type="text" class="form-control" id="register-email-2" name="phone" required>
+                                </div>
+
+
+                                <!-- <div class="form-group">
+                                    <label for="register-password-2">Password <span style="color: red;"> *</span></label>
+                                    <input type="password" class="form-control" id="register-password-2" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password-2">Confirm Password <span style="color: red;"> *</span></label>
+                                    <input type="password" class="form-control" id="confirm-password-2" name="confirmPassword" required>
+                                    <span id="message"></span>
+                                </div> -->
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                                           
+                                            <div class="form-group">
+                                                <label for="password">Password <span style="color: red;">*</span></label>
+                                                <input type="password" class="form-control" id="password" name="password" required>
+                                                <label style="display: none;" id="password-error"></label>
+                                            </div><!-- End .form-group -->
+    
+                                            <div class="form-group">
+                                                <label for="cpassword">Confirm Password <span style="color: red;">*</span></label>
+                                                <input type="password" class="form-control" id="cpassword" name="cpassword" required>
+                                                <label style="display: none;" id="confirm-password-error"></label>
+                                            </div><!-- End .form-group -->
+    
+                                           
+                                        </form>
+                                        
+                                    </div><!-- .End .tab-pane -->
+                                </div><!-- End .tab-content -->
+                               
+                                
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-outline-primary-2">
+                                        <span>SIGN UP</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+
+                                    
+                                </div><!-- End .form-footer -->
+                            </form>
+                           
+                        </div><!-- .End .tab-pane -->
+                    </div><!-- End .tab-content -->
+                </div><!-- End .form-tab -->
+            </div><!-- End .form-box -->
+        </div><!-- End .container -->
+    </div><!-- End .login-page section-bg -->
+</main><!-- End .main -->
+<script>
+    const myDiv = document.getElementById('errorMessage'); 
+    setTimeout(function() {
+    myDiv.innerHTML = ''; }, 3000);
+  </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+        
+        <% if (locals.notice) { %>
+            <script>
+              Swal.fire({
+                icon: 'error',
+                title: '<%=notice%>',
+                showConfirmButton: false,
+                timer: 2000
+              });
+            </script>
+            <% } %> 
+<script>
+            function checkPassword() {
+                let password = document.getElementById("password").value;
+                let confirmPassword = document.getElementById("cpassword").value;
+                let message = document.getElementById("confirm-password-error");
+                let pmessage = document.getElementById("password-error");
+        
+                if (password.length !== 0) {
+                    if(password.length >= 6){
+                        if (password === confirmPassword) {
+                            return true; // Allow form submission
+                        } else {
+                            message.style.display = ''
+                            message.textContent = "Passwords don't match";
+                            message.style.color = "#ff4d4d";
+                            return false; // Prevent form submission
+                        }
+                    } else {
+                        pmessage.style.display = ''
+                        pmessage.textContent = "Password should be at least 6 characters!";
+                        pmessage.style.color = "#ff4d4d";
+                        return false; // Prevent form submission
+                    }
+                } else {
+                    pmessage.style.display = ''
+                    pmessage.textContent = "Password can't be empty!";
+                    pmessage.style.color = "#ff4d4d";
+                    return false; // Prevent form submission
+                }
+            }
+        </script>
+        
+          
+          <script>
+            function validate() {
+                var name = document.getElementById("register-name").value.trim();
+                var email = document.getElementById("register-email-2").value;
+                var phone = document.getElementById("register-phone").value;
+                var password = document.getElementById("register-password-2").value;
+                var confirmPassword = document.getElementById("confirm-password-2").value;
+                var nameFormat = /^[a-zA-Z ]+$/;
+                var emailFormat = /^\S+@\S+\.\S+$/;
+                var phoneFormat = /^\d{10}$/;
+        
+                if (!name.match(nameFormat)) {
+                    window.alert("Please enter your name properly!");
+                    document.getElementById("register-name").focus();
+                    return false;
+                }
+        
+                if (!email.match(emailFormat)) {
+                    window.alert("Invalid email address.");
+                    document.getElementById("register-email-2").focus();
+                    return false;
+                }
+        
+                if (!phone.match(phoneFormat)) {
+                    window.alert("Enter a valid phone number.");
+                    document.getElementById("register-phone").focus();
+                    return false;
+                }
+        
+                if (password.length < 6) {
+                    window.alert("Password should be at least 6 characters long.");
+                    document.getElementById("register-password-2").focus();
+                    return false;
+                }
+        
+                if (password !== confirmPassword) {
+                    window.alert("Passwords don't match.");
+                    document.getElementById("confirm-password-2").focus();
+                    return false;
+                }
+        
+                return true;
+            }
+        </script>
+        
+
+          
+        
+
+        <%- include('../Partials/footer') %>

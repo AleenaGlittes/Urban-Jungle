@@ -1,0 +1,289 @@
+<%- include('../adminpartials/header') %>
+<nav>
+    <ul class="menu-aside">
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/adminDashboard"> <i class="icon material-icons md-home"></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+       
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/products"> <i class="icon material-icons md-monetization_on"></i>
+            
+                <span class="text">ProductList</span>
+            </a>
+           
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/order"> <i class="icon material-icons md-shopping_cart"></i>
+            
+                <span class="text">Orders</span>
+            </a>
+           
+        </li>
+        
+
+
+     
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/userslist"> <i class="icon material-icons md-store"></i>
+                <span class="text">Users</span>
+            </a>
+           
+        </li>
+        
+        <li class="menu-item active">
+            <a class="menu-link" href="/admin/Categories"> <i class="icon material-icons md-category"></i>
+            </i>
+                <span class="text">Categories</span>
+            </a>
+           
+        </li>
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" ><i class="icon material-icons md-local_offer"></i>
+                <span class="text">Coupon</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/couponList">Coupon List</a>
+                <a href="/admin/addcoupon">Add Coupon</a>
+            </div>
+        </li>
+      
+        <li class="menu-item has-submenu">
+            <a class="menu-link" href="#" > <i class="icon material-icons md-image"></i>
+                <span class="text">Banner</span>
+            </a>
+            <div class="submenu">
+                <a href="/admin/bannerList">Banner List</a>
+                <a href="/admin/banner">Add Banner</a>
+            </div>
+        </li>
+        <li class="menu-item ">
+            <a class="menu-link" href="/admin/offer"><i class="icon material-icons md-favorite"></i>
+
+            </i>
+                <span class="text">Offers</span>
+            </a>
+           
+        </li>
+       
+    </ul>
+    <hr>
+    <ul class="menu-aside">
+        <!-- <li class="menu-item has-submenu">
+            <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                <span class="text">Settings</span>
+            </a>
+            <div class="submenu">
+                <a href="page-settings-1.html">Setting sample 1</a>
+                <a href="page-settings-2.html">Setting sample 2</a>
+            </div>
+        </li> -->
+        <!-- <li class="menu-item">
+            <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                <span class="text"> Starter page </span>
+            </a>
+        </li> -->
+    </ul>
+    <br>
+    <br>
+</nav>
+</aside>
+<main class="main-wrap">
+<!-- <header class="main-header navbar"> -->
+    <!-- <div class="col-search">
+        <form class="searchform">
+            <div class="input-group">
+                <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+            </div>
+            <datalist id="search_terms">
+                <option value="Products">
+                <option value="New orders">
+                <option value="Apple iphone">
+                <option value="Ahmed Hassan">
+            </datalist>
+        </form>
+    </div> -->
+    <!-- <div class="col-nav">
+        <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
+        <ul class="nav">
+           
+            <li class="dropdown nav-item">
+                <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="asset/imgs/people/avatar2.jpg" alt="User"></a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                    <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
+                    <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
+                    <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                    <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                    <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header> -->
+<section class="content-main">
+
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Categories </h2>
+                    <p>Add, edit or delete a category</p>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form action="/admin/addcategory" method="post">
+                                <div class="mb-4">
+                                    <label for="product_name" class="form-label">Name</label>
+                                    <input type="text" placeholder="Type here" name="categoryName" class="form-control" id="product_name" />
+                                </div>
+
+                                
+                            
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea placeholder="Type here" name="CategoryDescription" class="form-control"></textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Create category</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table  id="category-table"class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                            </th>
+                                          
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Description</th>
+                                           
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% count=1 %>   
+                                        <% category.forEach(function(category) { %>
+                                            <tr>
+                                              <td><%= count%></td>
+                                              <td> <%= category.categoryName %></td>
+                                              <td> <%= category.CategoryDescription%></td>  
+                                              <td><% if(category.block == "1") { %>
+                                                <span class="badge rounded-pill alert-success">active</span>
+                                                <% }else{ %>
+                                                    <span class="badge rounded-pill alert-danger">Not active</span>
+                                                    
+                                                <% } %>
+                                               </td>  
+                                              <td class="text-end">
+                                                <% if(category.block == "0") { %>
+                                                    <a  data-cat_id="<%= category._id %>" class="btn btn-outline-danger rounded mt-15 listandunlist" style="margin-right: 10px;">Unlist</a>
+                                                    <% }else{ %>
+                                                      
+                                                        <a  data-cat_id="<%= category._id %>" class="btn btn-outline-info rounded mt-15 listandunlist" style="margin-right: 10px;">List</a>
+                                                    <% } %>
+                                               
+                                               
+                                            </td>
+                                            </tr>
+                                           <% count++ %>
+                                           <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+        
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#category-table').DataTable();
+            });
+        </script>
+        
+
+    <% if (locals.title) { %>
+        <script>
+          Swal.fire({
+            icon: 'error',
+            title: '<%=title%>',
+            confirmButtonText: "OK",
+          });
+        </script>
+      <% } %>
+<script>
+$('.listandunlist').on('click',function(){
+console.log('button clicked')
+var categoryId = $(this).data('cat_id');
+console.log(categoryId);
+var text = $(this).text().trim()
+console.log(text);
+data ={
+    "categoryId":categoryId,
+    "text":text
+}
+$.ajax({
+    url:'/admin/listandunlist',
+    method:"post",
+    data:data,
+
+    success:function(responce){
+        console.log(responce.message );
+      if(responce.message == "ItemListed"){
+        Swal.fire({
+            title: "Success",
+            text: "Category Item is listed",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload()
+            }
+          });
+      }else{
+        Swal.fire({
+            title: "Success",
+            text: "Category Item is Unlisted",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload()
+            }
+          });
+      }
+
+    }
+})
+
+})
+
+
+
+
+
+</script>
+
+        <%- include('../adminpartials/footer') %>

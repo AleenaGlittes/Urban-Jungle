@@ -1,0 +1,312 @@
+<%- include('../Partials/header') %>
+	<main class="main">
+		<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+			<div class="container">
+				<h1 class="page-title">Checkout<span>Shop</span></h1>
+			</div><!-- End .container -->
+		</div><!-- End .page-header -->
+		<nav aria-label="breadcrumb" class="breadcrumb-nav">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Shop</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+				</ol>
+			</div><!-- End .container -->
+		</nav><!-- End .breadcrumb-nav -->
+
+		<div class="page-content">
+			<div class="checkout">
+				<div class="container">
+					<div class="checkout-discount">
+						<form action="#">
+							<input type="text" class="form-control" required id="checkout-discount-input">
+							<label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here
+									to enter your code</span></label>
+						</form>
+					</div><!-- End .checkout-discount -->
+					<form action="#">
+						
+
+
+						<div class="row">
+							<% address1.forEach((address)=> { %>
+			  
+								<div class="col-md-6">
+									<div class="card">
+										<div class="card-body">
+											<h3 class="card-title">Billing Address</h3>
+											<p>
+												<%= address.Name %> <br>
+													<%= address.LastName %> <br>
+														<%= address.address %> <br>
+															<%= address.city %> <br>
+																<%= address.State %> <br>
+																	<%= address.Zipcode %> <br>
+																		<%= address.landmark %>
+											</p>
+											<a href="/profile">Edit <i class="icon-edit"></i></a>
+										</div>
+										
+											
+											<input
+											  class="form-check-input mt-3 address"
+											  id="<%=address.id %>"
+											  type="radio"
+											  value="<%=address.id %>"
+											  name="customerAddress"
+											/>
+								
+										
+									</div>
+								</div>
+								<% }) %>
+						</div>
+						
+
+
+
+
+						<aside class="col-lg-3">
+							<div class="summary">
+								<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+								<table class="table table-summary">
+									<thead>
+										<tr>
+											<th>Product</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+
+									<tbody>
+
+
+
+
+										<tr class="summary-subtotal">
+											<td></td>
+											<td>$160</td>
+										</tr><!-- End .summary-subtotal -->
+										<tr>
+											<td>Shipping:</td>
+											<td>Free shipping</td>
+										</tr>
+										<tr class="summary-total">
+											<td>Total:</td>
+											<td>$160.00</td>
+										</tr><!-- End .summary-total -->
+									</tbody>
+								</table><!-- End .table table-summary -->
+
+								<div class="accordion-summary" id="accordion-payment">
+									<div class="card">
+										<!-- <div class="card-header" id="heading-1">
+												<h2 class="card-title">
+													<a role="button" data-toggle="collapse" href="#collapse-1"
+														aria-expanded="true" aria-controls="collapse-1">
+														Direct bank transfer
+													</a>
+												</h2>
+											</div> -->
+										<div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
+											data-parent="#accordion-payment">
+											<!-- <div class="card-body">
+													Make your payment directly into our bank account. Please use your
+													Order ID as the payment reference. Your order will not be shipped
+													until the funds have cleared in our account.
+												</div> -->
+										</div>
+									</div>
+
+									<div class="card">
+										<!-- <div class="card-header" id="heading-2">
+												<h2 class="card-title">
+													<a class="collapsed" role="button" data-toggle="collapse"
+														href="#collapse-2" aria-expanded="false"
+														aria-controls="collapse-2">
+														Check payments
+													</a>
+												</h2>
+											</div> -->
+										<div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+											data-parent="#accordion-payment">
+											<div class="card-body">
+												Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.
+												Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-3">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+													Cash on delivery
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-3" class="collapse" aria-labelledby="heading-3"
+											data-parent="#accordion-payment">
+											<div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor
+												sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat
+												mattis eros.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-4">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+													PayPal <small class="float-right paypal-link">What is
+														PayPal?</small>
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-4" class="collapse" aria-labelledby="heading-4"
+											data-parent="#accordion-payment">
+											<div class="card-body">
+												Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
+												semper suscipit, posuere a, pede. Donec nec justo eget felis
+												facilisis fermentum.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-5">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
+													Credit Card (Stripe)
+													<img src="assets/images/payments-summary.png" alt="payments cards">
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-5" class="collapse" aria-labelledby="heading-5"
+											data-parent="#accordion-payment">
+											<div class="card-body"> Donec nec justo eget felis facilisis
+												fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+												Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+								</div><!-- End .accordion -->
+
+								<!-- <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+										<span class="btn-text">Place Order</span>
+										<span class="btn-hover-text">Proceed to Checkout</span>
+									</button> -->
+								<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block"
+									id="placeOrder">
+									<span class="btn-text">Place Order</span>
+									<span class="btn-hover-text">Proceed to Checkout</span>
+								</button>
+
+							</div><!-- End .summary -->
+						</aside><!-- End .col-lg-3 -->
+				</div><!-- End .row -->
+				</form>
+			</div><!-- End .container -->
+		</div><!-- End .checkout -->
+		</div><!-- End .page-content -->
+	</main><!-- End .main -->
+
+	<%- include('../Partials/footer') %>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<!-- <script>
+			document.getElementById('place-order-btn').addEventListener('click', function (e) {
+				e.preventDefault();
+				Swal.fire({
+					title: 'Place Order',
+					text: "Are you sure you want to place this order?",
+					icon: 'question',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes, Place it!'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire(
+							'PLaced!',
+							'Your order has been Placed.',
+							'success'
+						)
+					}
+				})
+			})
+
+		</script> -->
+		<script>
+
+			$(document).ready(function () {
+				update_amounts();
+			
+				function update_amounts() {
+				  let subtotal = 0;
+				  $("#protable > tbody > tr").each(function () {
+					let price = $(this)
+					  .find(".proprice")
+					  .text()
+					  .replace(/[^\d\.]/g, "");
+					let total = parseInt(price);
+					//   console.log(price);
+					subtotal += total;
+					//   console.log(subtotal);
+				  });
+			
+				  let couponrs = 0;
+				  let total = subtotal - couponrs;
+			
+				  $("#subtotal").text("₹" + subtotal.toFixed(2));
+			
+				  $("#finaltotal").text("₹" + total.toFixed(2));
+				}
+			  });
+			
+			  $("#placeOrder").on("click", function () {
+				var address = $("input[name=customerAddress]:checked").val();
+				var paymentMethod = $(
+				  '.accordion-summary .card-header .method[aria-expanded="true"]'
+				).data("method");
+				// var discount = $("#dis").text().trim();
+				var purchase = $("#finaltotal").text().replace(/[^\d\.]/g, "");
+				// var categoryId =$('.category_id').val()
+				var data = {
+				  paymentmethod: paymentMethod,
+				  total: purchase,
+				  address: address,
+				};
+				console.log(data);
+				$.ajax({
+				  url: "/placeOrder",
+				  method: "post",
+				  data: data,
+			
+				  success: function (responce) {
+					if (responce.message == "1") {
+					  Swal.fire({
+						title: "Success",
+						text: "Order placed successfully",
+						icon: "success",
+						confirmButtonText: "OK",
+					  }).then((result) => {
+						if (result.isConfirmed) {
+						  window.location.href = "/profile"; // Redirect to profile page
+						}
+					  });
+					} else {
+					  Swal.fire({
+						title: "Error",
+						text: "Something went worng try again after sometimes",
+						icon: "error",
+						confirmButtonText: "OK",
+					  });
+					}
+				  },
+				});
+			  });
+			</script>
