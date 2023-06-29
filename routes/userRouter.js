@@ -77,8 +77,8 @@ user_router.post('/otp',userController.otp_verify);
 
 //---------- PRODUCT MANAGEMENT---------------
 
-user_router.get('/productpage',user_auth.isLogin,userController.productspage)
-user_router.get('/viewproductpage',user_auth.isLogin,userController.load_viewproduct)
+user_router.get('/products',user_auth.isLogin,userController.productspage)
+user_router.get('/viewproduct',user_auth.isLogin,userController.load_viewproduct)
 user_router.post('/search',userController.productsearch)
 // ------------CART MANAGEMENT------------------
 

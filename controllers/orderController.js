@@ -62,7 +62,8 @@ const order = {
         res.send({ message: "0" });
       }
     } catch (error) {
-      console.log(error.message);
+    res.render('error', { error: error.message });
+     
     }
   },
   createOrder: async (req, res) => {
@@ -224,8 +225,8 @@ const order = {
         res.send({ message: "0" });
       }
     } catch (error) {
-      // res.render("error", { error: error.message });
-      console.log('error',{error:error.message})
+      res.render("error", { error: error.message });
+      // console.log('error',{error:error.message})
     }
   },
   
@@ -248,7 +249,8 @@ const order = {
       res.render("orderDetails", { order: order_details ,user:req.session.user_id});
       console.log(order_details)
     } catch (error) {
-      console.log('error', { error: error.message })
+      res.render('error', { error: error.message });
+
     }
   },
 
@@ -269,7 +271,8 @@ const order = {
         res.send({ message: "0" });
       }
     } catch (error) {
-        console.log('error',{error:error.message})
+      res.render('error', { error: error.message });
+
     }
   },
 
@@ -289,7 +292,8 @@ returnRequest: async(req, res) => {
       res.send({ message: "0" });
     }
   } catch (error) {
-    console.log("error", { error: error.message });
+    res.render('error', { error: error.message });
+
   }
 },
 
@@ -356,7 +360,8 @@ approveReturn: async (req, res) => {
       res.send({ message: "0" });
     }
   } catch (error) {
-    console.log("error", { error: error.message });
+    res.render('error', { error: error.message });
+
   }
 },
 
@@ -380,7 +385,8 @@ status_update :async (req, res) => {
     }
     res.send({ message: "1" });
   } catch (error) {
-    console.log('error',{error:error.message})
+    res.render('error', { error: error.message });
+
   }
 },
 }

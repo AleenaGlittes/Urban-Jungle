@@ -118,7 +118,6 @@ admin_router.post('/editcoupon', couponControllers.editCoupon)
 admin_router.get('/deletecoupon', couponControllers.deletecoupon)
 
 
-
 // --------------SALES REPORT--------------------
 
 admin_router.get('/salesReport', salesController.salesReport)

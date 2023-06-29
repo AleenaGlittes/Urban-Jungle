@@ -382,11 +382,11 @@ const block_user = async (req, res) => {
     try {
         const salesData = await order.aggregate([
             { $match: { status: 'Delivered' } },  { $group: { _id: { $dateToString: { format: '%Y-%m-%d',date: { $toDate: '$orderDate' } }},totalRevenue: { $sum: '$total' } }},
-            {$sort: { _id: -1 }},{$project: { _id: 0, date: '$_id',totalRevenue: 1}},{$limit: 4}]);
+            {$sort: { _id: -1 }},{$project: { _id: 0, date: '$_id',totalRevenue: 1}},{$limit: 7}]);
     console.log(salesData);
             const productData = await order.aggregate([
             { $match: { status: 'Delivered' } },  { $group: { _id: { $dateToString: { format: '%Y-%m-%d',date: { $toDate: '$orderDate' } }},totalRevenue: { $sum: '$total' } }},
-            {$sort: { _id: -1 }},{$project: { _id: 0, date: '$_id',totalRevenue: 1}},{$limit: 4}]);
+            {$sort: { _id: -1 }},{$project: { _id: 0, date: '$_id',totalRevenue: 1}},{$limit: 7}]);
     
           console.log(salesData);
     

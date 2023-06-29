@@ -17,7 +17,9 @@ const offerModel = require("../model/offerModel");
 
 
 const userPage = async (req, res) => {
-  res.render("home", { user: req.session.user_id });
+  const productdata=await product.find({});
+  const offerData=await Offers.find({});
+  res.render("home", { user: req.session.user_id ,product:productdata,offer:offerData});
 };
 
 
@@ -105,7 +107,7 @@ const verifyLogin = async (req, res) => {
       res.render("login", { message: "Username Incorrect" });
     }
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -140,7 +142,7 @@ const logout = (req, res) => {
     req.session.destroy();
     res.redirect("/");
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
 
   }
 };
@@ -152,7 +154,7 @@ const otp_page = async (req, res) => {
     const title = req.flash("title");
     res.render("loginOtp", { title: title[0] || "" });
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
 
   }
 };
@@ -205,7 +207,7 @@ const opt_singIn = async (req, res) => {
     }
   } catch (error) {
     console.log("otp error");
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
 
   }
 };
@@ -219,7 +221,7 @@ const load_otpverifypage = async (req, res) => {
     const title = req.flash("title");
     res.render("otp", { title: title[0] || "" });
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
 
   }
 };
@@ -256,7 +258,7 @@ otp_verify = async (req, res) => {
       res.redirect("loginOtp");
     }
   } catch (error) {  
-      res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
 
     res.status(500).send({ message: "Server Error" });
   }
@@ -274,7 +276,7 @@ const load_viewproduct = async (req, res) => {
 
     res.render("viewproduct", { data: data });
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -304,7 +306,7 @@ const productspage = async (req, res) => {
       totalPages: Math.ceil(totalProducts / productsPerPage) // Calculate the total number of pages
     });
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
   }
 }
 
@@ -391,7 +393,7 @@ const add_address = async (req, res) => {
       res.status(200).redirect("/profile");
     }
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -446,7 +448,7 @@ const forgetPassword = async (req, res) => {
       res.send({ message: "0", status: "Incorrect Email" });
     }
   } catch (error) {
-    res.render(("error"),error.messsage);
+    res.render('error', { error: error.message });
   }
 }
 
@@ -506,8 +508,6 @@ const filter_product = async (req, res) => {
     search.push(...req.body.search);
     console.log(search);
     console.log("hlooo")
-
-
 
     const query = {};
 
@@ -571,7 +571,7 @@ const edit_address = async (req, res) => {
       res.status(200).redirect("/profile");
     }
   } catch (error) {
-      res.render('error',{error:error.message})
+    res.render('error', { error: error.message });
   }
 };
 
@@ -585,72 +585,55 @@ const edit_address = async (req, res) => {
       await address.findByIdAndDelete(id)
       res.redirect('/profile');
   }catch(error){
-      console.log(error.message)
+    res.render('error', { error: error.message });
   }
 }
 
- const productsearch=async(req,res)=>{
-  try{
-    console.log("kllllllllll")
+const productsearch = async (req, res) => {
+  try {
+    const searchname = req.body.searchname.toLowerCase().trim();
+    const usersession = req.session.user_id;
 
-  const searchname=req.body.searchname
-  console.log("search name is"+searchname)
-  const usersession=req.session.user_id
-  console.log(usersession)
-  let productnamelower= searchname.toLowerCase().replace(/\s/g,"");
-
-  const data=await collection.findOne({email:usersession})   
+    const data = await collection.findOne({ email: usersession });
   
-  const page = parseInt(req.query.page) || 1; // Get the current page from the query parameters
-  const totalProducts = await product.countDocuments({ productname: { $regex: '.' + productnamelower + '.', $options: 'i' } });
-  const category=await categorymodel.find({});
-  const offers=await offerModel.find({});
-  const products = await product.aggregate([{$match:{ productname:{$regex: ".",$options: "i"}}}])
-    .skip((page - 1) * productsPerPage)
-    .limit(productsPerPage)
-    .exec();
+    const page = parseInt(req.query.page) || 1;
+    const productsPerPage = 10; // Define the number of products to display per page
+    const totalProducts = await product.countDocuments({ productname: { $regex: searchname, $options: 'i' } });
+    const category = await categorymodel.find({});
+    const offers = await offerModel.find({});
+    const products = await product.aggregate([
+      { $match: { productname: { $regex: searchname, $options: 'i' } } },
+      { $skip: (page - 1) * productsPerPage },
+      { $limit: productsPerPage }
+    ]);
 
-    // db.products.aggregate([{$match:{ productname:{$regex: "Red Shirt",$options: "i"}}}]);
-
-  //const product_data = await product.find({productname:{$regex: '.'+productnamelower+'.',$options:'i'}})
-  console.log("product data " + products);
-  if (products.length === 0) {
-      res.render('product1',{
+    if (products.length === 0) {
+      res.render('product1', {
         model: '1',
-      products: products,
-      category:category,
-      user: req.session.user_id,
-      currentPage: page,
-      offers: offers,
-      totalPages: Math.ceil(totalProducts / productsPerPage) 
-      
-      })
-  } else {
-   
-  // console.log("error")
- 
-     res.render('product1',{
-      model: '1',
-      products: products,
-      category:category,
-      user: req.session.user_id,
-      currentPage: page,
-      offers: offers,
-      totalPages: Math.ceil(totalProducts / productsPerPage) 
-      
-      
-     })
+        products: products,
+        category: category,
+        user: req.session.user_id,
+        currentPage: page,
+        offers: offers,
+        totalPages: Math.ceil(totalProducts / productsPerPage)
+      });
+    } else {
+      res.render('product1', {
+        model: '1',
+        products: products,
+        category: category,
+        user: req.session.user_id,
+        currentPage: page,
+        offers: offers,
+        totalPages: Math.ceil(totalProducts / productsPerPage)
+      });
+    }
+  } catch (error) {
+    res.render('error', { error: error.message });
   }
-  
-// const categoryall= await product.find({category:product_data.category})
+};
 
 
-
-  }catch(error){
-      console.log('error',{error:error.message})
-  }
-
-}
 
 const wallet_load=async(req,res)=>{
   try{
@@ -661,7 +644,7 @@ const wallet_load=async(req,res)=>{
      res.render("wallet",{wallet:walletData})
 
   }catch{
-console.log(error.messsage)
+    res.render('error', { error: error.message });
   }
 
 }

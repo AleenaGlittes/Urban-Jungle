@@ -28,7 +28,7 @@ const load_cart = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -101,7 +101,7 @@ const removeItemFromCart = async (req, res) => {
     
   
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -143,7 +143,7 @@ const incrementProduct = async (req, res) => {
       res.send({ message: "0" });
     }
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
     res.send({ message: "Error occurred." });
   }
 };
@@ -185,7 +185,7 @@ const decrementProduct = async (req, res) => {
       res.send({ message: "0" });
     }
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
     res.send({ message: "Error occurred." });
   }
 };
@@ -209,7 +209,7 @@ const checkout = async (req, res) => {
     res.render("checkout1", { address1: address1, cart: cart ,user:req.session.user_id,coupons:coupons});
 
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
   }
 };
 
@@ -249,7 +249,7 @@ const checkvalid_Coupon = async (req, res) => {
     //   res.send({ message: "Coupon code invalid" });
     // }
   } catch (error) {
-      console.log('error',{error:error.message})
+    res.render('error', { error: error.message });
   }
 };
 

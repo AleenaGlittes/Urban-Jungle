@@ -23,8 +23,8 @@ const xlsx=require('xlsx')
 
       res.render("salesReport", { orders: order_details });
     } catch (error) {
-      console.log(error.message)
-    //   res.render('error', { error: error.message })
+     
+      res.render('error', { error: error.message })
     }
   }
 

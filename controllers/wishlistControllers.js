@@ -58,7 +58,8 @@ const addtowishlist = async (req, res) => {
       res.send({ mes: "added", data: updatewishlist });
     }
   } catch (error) {
-    console.log(error.message);
+    res.render('error', { error: error.message });
+
   }
 };
 
@@ -83,7 +84,8 @@ const delete_wishlist = async (req, res) => {
       res.send({ message: "0" });
     }
   } catch (error) {
-      console.log('error',{error:error.message})
+    res.render('error', { error: error.message });
+
   }
 };
 

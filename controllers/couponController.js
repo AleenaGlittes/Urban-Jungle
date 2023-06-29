@@ -73,7 +73,7 @@ const deletecoupon = async (req, res) => {
         res.redirect('/admin/couponList')
 
     } catch (error) {
-        console.log(error);
+      res.render('error', { error: error.message });
     }
 }
 

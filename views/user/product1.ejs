@@ -8,8 +8,14 @@
 
   <div class="page-content">
     <div class="container">
-      <div class="toolbox">
-        <div class="toolbox-left">
+      <div>
+
+
+      </div>
+      <div class="toolbox" style="padding-top: 41px;">
+
+        
+        <div class="toolbox-left" >
           <a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>
         </div><!-- End .toolbox-left -->
 
@@ -26,7 +32,7 @@
             <div class="product-item col-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2" data-category="<%- product.category %>">
               <div class="product">
                 <figure class="product-media">
-                  <a href="/viewproductpage?id=<%= product._id %>">
+                  <a href="/viewproduct?id=<%= product._id %>">
                     <img src="upload/<%= product.productimage[0] %>" alt="Product image" class="product-image">
                   </a>
                   <% if (offer) { %>
@@ -120,19 +126,19 @@
 <div class="pagination justify-content-center">
   <% if (totalPages > 1) { %>
     <% if (currentPage > 1) { %>
-      <a href="/productpage?page=<%= currentPage - 1 %>" class="page-link page-link-prev"><span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Previous </a>
+      <a href="/products?page=<%= currentPage - 1 %>" class="page-link page-link-prev"><span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Previous </a>
     <% } %>
 
     <% for (let i = 1; i <= totalPages; i++) { %>
       <% if (i === currentPage) { %>
         <span class="active page-link"><%= i %></span>
       <% } else { %>
-        <a href="/productpage?page=<%= i %>" class="page-link"><%= i %></a>
+        <a href="/products?page=<%= i %>" class="page-link"><%= i %></a>
       <% } %>
     <% } %>
 
     <% if (currentPage < totalPages) { %>
-      <a href="/productpage?page=<%= currentPage + 1 %>" class="page-link page-link-next">Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span></a>
+      <a href="/products?page=<%= currentPage + 1 %>" class="page-link page-link-next">Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span></a>
     <% } %>
   <% } %>
 </div>
