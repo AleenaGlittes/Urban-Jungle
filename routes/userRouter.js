@@ -4,7 +4,7 @@ const path=require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const sharp=require('sharp')
-
+const adminRouter=require('../routes/adminRoute')
 
 
 
@@ -142,18 +142,19 @@ user_router.get('/error', (req, res) => {
 
 
 // middleware of the routes to handle unhandled routes
-// user_router.use((req, res, next) => {
-//     const error = new Error('Page not found');
-//     error.status = 404;
-//     next(error);
-//   });
+user_router.use('/admin', adminRouter);
+user_router.use((req, res, next) => {
+    const error = new Error('Page not found');
+    error.status = 404;
+    next(error);
+  });
   
-//   // Error handling middleware to display the error message
-//   user_router.use((error, req, res, next) => {
-//     const status = error.status || 500;
-//     const message = error.message || 'Something went wrong';
-//     res.status(status).render('error', { error: message });
-//   });
+  // Error handling middleware to display the error message
+  user_router.use((error, req, res, next) => {
+    const status = error.status || 500;
+    const message = error.message || 'Something went wrong';
+    res.status(status).render('error', { error: message });
+  });
 
 module.exports = user_router;
 
