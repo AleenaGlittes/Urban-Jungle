@@ -1,14 +1,9 @@
 const mongoose = require("mongoose")
 require("dotenv").config()
-mongoose.connect(process.env.dbconnect, { useNewUrlParser: true })
-    .then(() => {
-        console.log("mongodb connected");
-    })
-    .catch(() => {
-        console.log("failed to connect");
-    })
+const {connectToMongoDB} = require("./config/mongooseConnect")
 
 
+connectToMongoDB()
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -19,7 +14,7 @@ const adminRouter = require('./routes/adminRoute');
 
 
 app.use('/', userRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', adminRouter);      
 
 
 
