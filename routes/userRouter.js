@@ -77,7 +77,7 @@ user_router.post('/otp',userController.otp_verify);
 
 //---------- PRODUCT MANAGEMENT---------------
 
-user_router.get('/products',user_auth.isLogin,userController.productspage)
+user_router.get('/products',userController.productspage)
 user_router.get('/viewproduct',user_auth.isLogin,userController.load_viewproduct)
 user_router.post('/search',userController.productsearch)
 // ------------CART MANAGEMENT------------------
@@ -140,6 +140,20 @@ user_router.get('/error', (req, res) => {
 });
 
 
+
+// middleware of the routes to handle unhandled routes
+// user_router.use((req, res, next) => {
+//     const error = new Error('Page not found');
+//     error.status = 404;
+//     next(error);
+//   });
+  
+//   // Error handling middleware to display the error message
+//   user_router.use((error, req, res, next) => {
+//     const status = error.status || 500;
+//     const message = error.message || 'Something went wrong';
+//     res.status(status).render('error', { error: message });
+//   });
 
 module.exports = user_router;
 
